@@ -46,7 +46,7 @@
   "description": "Custom outdoor carpentry. Handbuilt cedar planters, dining tables, hardwood fences, and bespoke outdoor furniture.",
   "url": "https://nasarassembly.com",
   "telephone": "+1-908-489-1502",
-  "email": "info@nasarassembly.com",
+  "email": "steven@nasarassembly.com",
   "image": "https://nasarassembly.com/og-image.jpg",
   "priceRange": "$$$",
   "sameAs": [
@@ -320,6 +320,31 @@ nav{transition:background .6s cubic-bezier(.25,.46,.45,.94),padding .6s cubic-be
 .gallery-item img.loaded{opacity:1}
 section{transition:background .6s cubic-bezier(.25,.46,.45,.94)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* HAMBURGER BUTTON */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:200;position:relative}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);margin:5px 0;transition:all .4s cubic-bezier(.25,.46,.45,.94)}
+nav.scrolled .hamburger span{background:var(--dark)}
+.hamburger.open span{background:var(--white)!important}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* MOBILE MENU OVERLAY */
+.mobile-menu{position:fixed;inset:0;z-index:150;background:rgba(26,23,20,.97);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .6s cubic-bezier(.25,.46,.45,.94)}
+.mobile-menu.open{opacity:1;visibility:visible}
+.mobile-menu-inner{display:flex;flex-direction:column;align-items:center;gap:2rem}
+.mobile-menu-inner a{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--white);text-decoration:none;opacity:0;transform:translateY(20px);transition:all .5s cubic-bezier(.25,.46,.45,.94);cursor:pointer}
+.mobile-menu.open .mobile-menu-inner a{opacity:1;transform:translateY(0)}
+.mobile-menu.open .mobile-menu-inner a:nth-child(1){transition-delay:.1s}
+.mobile-menu.open .mobile-menu-inner a:nth-child(2){transition-delay:.15s}
+.mobile-menu.open .mobile-menu-inner a:nth-child(3){transition-delay:.2s}
+.mobile-menu.open .mobile-menu-inner a:nth-child(4){transition-delay:.25s}
+.mobile-menu.open .mobile-menu-inner a:nth-child(5){transition-delay:.3s}
+.mobile-menu.open .mobile-menu-inner a:nth-child(6){transition-delay:.35s}
+.mobile-menu-inner a:hover{color:var(--light-accent)}
+
+@media(max-width:900px){.hamburger{display:block}}
 </style>
 </head>
 <body>
@@ -334,7 +359,21 @@ section{transition:background .6s cubic-bezier(.25,.46,.45,.94)}
     <li><a role="button" tabindex="0" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a></li>
     <li><a role="button" tabindex="0" onclick="document.getElementById('inquiry').scrollIntoView({behavior:'smooth'})">Inquiries</a></li>
   </ul>
+<button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <a role="button" tabindex="0" onclick="goTo('services')">Services</a>
+    <a role="button" tabindex="0" onclick="goTo('gallery')">Gallery</a>
+    <a role="button" tabindex="0" onclick="goTo('restoration')">Restoration</a>
+    <a role="button" tabindex="0" onclick="goTo('process')">Process</a>
+    <a role="button" tabindex="0" onclick="goTo('contact')">Contact</a>
+    <a role="button" tabindex="0" onclick="goTo('inquiry')">Inquiries</a>
+  </div>
+</div>
+
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grain"></div>
@@ -486,7 +525,7 @@ section{transition:background .6s cubic-bezier(.25,.46,.45,.94)}
   <p class="section-tag reveal">Get Started</p>
   <h2 class="section-heading reveal">Ready to build<br>something beautiful?</h2>
   <p class="section-sub reveal">Tell us about your project. We'll get back to you within 24 hours with a free estimate.</p>
-  <a role="button" tabindex="0" onclick="window.location.href='mailto:info@nasarassembly.com'" class="cta-btn reveal">Get in Touch <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  <a role="button" tabindex="0" onclick="window.location.href='mailto:steven@nasarassembly.com'" class="cta-btn reveal">Get in Touch <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
 </section>
 <section class="inquiry" id="inquiry">
   <div class="inquiry-inner">
@@ -507,7 +546,7 @@ section{transition:background .6s cubic-bezier(.25,.46,.45,.94)}
         <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <div class="contact-text">
           <span class="contact-label">Email</span>
-          <a role="button" tabindex="0" onclick="window.location.href='mailto:info@nasarassembly.com'" class="contact-value">info@nasarassembly.com</a>
+          <a role="button" tabindex="0" onclick="window.location.href='mailto:steven@nasarassembly.com'" class="contact-value">steven@nasarassembly.com</a>
         </div>
       </li>
       <li class="contact-item">
@@ -583,6 +622,21 @@ document.querySelectorAll('.gallery-item img, .before-after-container img').forE
 let navTicking=false;
 function updateNavScroll(){nav.classList.toggle('scrolled',window.scrollY>80);navTicking=false}
 window.addEventListener('scroll',()=>{if(!navTicking){requestAnimationFrame(updateNavScroll);navTicking=true}},{passive:true});
+
+// Hamburger menu
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>{
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';
+});
+function goTo(id){
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth'})},100);
+}
 </script>
 </body>
 </html>
