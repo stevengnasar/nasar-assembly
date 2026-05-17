@@ -599,7 +599,6 @@ function gtag_report_conversion(url) {
   <p class="section-sub reveal">Tell us about your project and we'll get back to you within 24 hours with a free estimate.</p>
   <div class="contact-form reveal">
     <form action="https://formspree.io/f/xkoengje" method="POST">
-      <input type="hidden" name="_next" value="https://nasarassembly.com/thank-you.html">
       <input type="hidden" name="_subject" value="New inquiry from nasarassembly.com">
       <div class="form-row">
         <div class="form-group">
@@ -752,6 +751,33 @@ function goTo(id){
   document.body.style.overflow='';
   setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth'})},100);
 }
+
+// Contact form - submit via fetch and redirect
+document.querySelector('.contact-form form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const form=this;
+  const btn=form.querySelector('.form-submit');
+  const origText=btn.innerHTML;
+  btn.innerHTML='Sending...';
+  btn.disabled=true;
+  fetch(form.action,{
+    method:'POST',
+    body:new FormData(form),
+    headers:{'Accept':'application/json'}
+  }).then(r=>{
+    if(r.ok){
+      window.location.href='https://nasarassembly.com/thank-you.html';
+    } else {
+      btn.innerHTML='Something went wrong - try again';
+      btn.disabled=false;
+      setTimeout(()=>{btn.innerHTML=origText},3000);
+    }
+  }).catch(()=>{
+    btn.innerHTML='Something went wrong - try again';
+    btn.disabled=false;
+    setTimeout(()=>{btn.innerHTML=origText},3000);
+  });
+});
 </script>
 </body>
 </html>
